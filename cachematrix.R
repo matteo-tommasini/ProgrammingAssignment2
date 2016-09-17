@@ -8,22 +8,22 @@
 # NOTE: we assume that the matrix is INVERTIBLE, otherwise the program will not work!
 
 #   Create an object storing the result of makeCacheMatrix(m).
-#   By definition of this function this object is a LIST OF 4 FUNCTIONS
+#   By definition of this function, this object is a LIST OF 4 FUNCTIONS
 # mylist = makeCacheMatrix(m)
 
 #   Asks the inverse of m, or the cached inverse of m (if it has been already computed) with
 # cacheSolve(mylist)
-#   The first time of the call of cacheSolve(mylist), the mean is computed and returned, WITHOUT any print message
+#   The first time of the call of cacheSolve(mylist), the mean is COMPUTED and returned, WITHOUT any print message
 #   All the next times that cacheSolve(mylist) is called, a message will be printed saying
-#   that the inverse already cached will be returned , instead of re-computing the inverse a second time
+#   that the inverse already cached will be returned, instead of re-computing the inverse a second time
 
 #   NOTE: if some objects of the matrix m were changed between a call to cacheMean(mylis) and the next one,
 #   then we MUST manually update mylist using
 # mylist$set(m)
-#   This forces the inverse to be set again to NULL, so that when cacheSolve(mylist) is called again,
+#   This forces the computed inverse to be set again to NULL, so that when cacheSolve(mylist) is called again,
 #   then the inverse is computed as if it was the first time (then cached for later use)
 
-# returns a vector of 4 functions, to be later used by the function cacheSolve() as argument
+# Returns a vector of 4 functions, to be later used by the function cacheSolve() as argument
 makeCacheMatrix <- function(my_invertible_matrix=matrix()) {
   saved_inverse <- NULL
   
@@ -33,7 +33,7 @@ makeCacheMatrix <- function(my_invertible_matrix=matrix()) {
     my_invertible_matrix <<- provided_matrix
     saved_inverse <<- NULL
   }
-  # Note the use of <<- above (instead of <-)
+  # Note the use of <<- in the lines above
   
   # Returns the matrix stored in my_invertible_matrix
   get <- function() my_invertible_matrix
@@ -41,7 +41,7 @@ makeCacheMatrix <- function(my_invertible_matrix=matrix()) {
   # Sets saved_inverse to the matrix computed_inverse (computed somewhere else) # no return values
   setinverse <- function(computed_inverse) saved_inverse <<- computed_inverse
   
-  # Returns the inverse saved in  (or NULL if the mean has not been computed yet)
+  # Returns the inverse saved in saved_inverse (or NULL if the inverse has not been computed yet)
   getinverse <- function() saved_inverse
   
   # Returns a list of the 4 functions defined above
